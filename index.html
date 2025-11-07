@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mohd Ayan — Portfolio</title>
+  <meta name="description" content="Mohd Ayan — B.Tech CSE | Data Science & Machine Learning. Portfolio with projects, experience, and contact." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2215%22 ry=%2215%22 fill=%22%2300e6c3%22/><text x=%2250%22 y=%2270%22 text-anchor=%22middle%22 font-size=%2270%22 fill=%22%23011b19%22 font-family=%22Arial%22>MA</text></svg>">
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#031018;
+      --card:#071826;
+      --muted:#8fb6bd;
+      --accent:#00e6c3;
+      --accent-2:#00a6d6;
+      --glass:rgba(255,255,255,0.03);
+      --font-sans:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{
+      height:100%;margin:0;font-family:var(--font-sans);
+      background:linear-gradient(180deg,#00121a 0%,var(--bg) 100%);
+      color:#d8f7f0;
+      scroll-behavior:smooth;
+    }
+    #tsparticles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
+    a{color:var(--accent);text-decoration:none}
+    .wrap{max-width:1100px;margin:28px auto;padding:20px;position:relative;z-index:2}
+    header{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      position:sticky; top: 12px; z-index: 100;
+      background: rgba(3, 16, 24, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 12px 20px;
+      border-radius: 12px;
+      border: 1px solid var(--glass);
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    /* .logo removed on purpose (was the short-name badge) */
+    nav{display:flex;gap:10px; align-items: center;}
+    .nav-link{
+      padding:8px 12px;border-radius:8px;color:var(--muted);
+      cursor:pointer;border:1px solid transparent;transition:0.3s
+    }
+    .nav-link.active{
+      color:#012b26;background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      font-weight:700
+    }
+    .btn{
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      border:none;padding:10px 14px;border-radius:10px;
+      color:#012b26;font-weight:700;cursor:pointer;
+      transition: transform 0.3s;
+    }
+    .btn:hover { transform: scale(1.05); }
+
+    .page-section { margin-top: 60px; }
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:22px; margin-top: 20px;}
+    .card{
+      background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);
+      padding:22px;border-radius:14px;
+      box-shadow:0 8px 40px rgba(0,0,0,0.6);backdrop-filter:blur(6px);
+      border: 1px solid var(--glass);
+    }
+    h1{margin:0;font-size:28px}
+    h2 { font-size: 24px; color: var(--accent); border-bottom: 2px solid var(--accent-2); padding-bottom: 8px; margin-bottom: 20px;}
+    h3 { font-size: 18px; color: var(--accent-2); margin-bottom: 10px; }
+    .typing-text { border-right: 2px solid var(--accent); animation: blink 1s step-end infinite; white-space: nowrap; color: var(--accent); font-weight:700}
+    @keyframes blink { from, to { border-color: transparent } 50% { border-color: var(--accent); } }
+    .tagline{color:var(--muted);margin-top:8px}
+    .about{margin-top:12px;color:#bfeee7;line-height:1.5}
+    .skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .chip{background:var(--glass);padding:8px 10px;border-radius:999px;font-size:13px;color:var(--muted); border: 1px solid rgba(255,255,255,0.05);}
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+    .skills-grid ul { list-style-type: none; padding-left: 0; }
+    .skills-grid li { color: var(--muted); margin-bottom: 8px; padding-left: 20px; position: relative; }
+    .skills-grid li::before { content: '▹'; position: absolute; left: 0; color: var(--accent); }
+    .projects-grid{display:grid;grid-template-columns:1fr;gap:20px;margin-top:14px}
+    .proj-card { padding: 18px;border-radius:12px;border:1px solid rgba(255,255,255,0.05); transition:transform .28s ease,box-shadow .28s ease; background:linear-gradient(180deg,rgba(255,255,255,0.015),transparent); }
+    .proj-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.6)}
+    .proj-title { font-weight: 700; font-size: 20px; color: var(--accent); }
+    .proj-desc { color: var(--muted); margin-top: 10px; line-height: 1.6; }
+    .proj-links { display: flex; gap: 10px; margin-top: 14px; }
+    .proj-link { background: transparent; border: 1px solid var(--accent-2); color: var(--accent-2); padding: 8px 12px; border-radius: 8px; font-weight: 600; }
+    .proj-link:hover { background: var(--accent-2); color: #012b26; }
+    .timeline { display: flex; flex-direction:column; gap:16px; margin-top:16px; }
+    .timeline-item { padding:16px; background:var(--glass); border-radius:10px; border-left:4px solid var(--accent); }
+    .timeline-title { font-weight:700; font-size:18px; }
+    .timeline-subtitle { color:var(--muted); font-size:14px; margin-top:4px; }
+    .timeline-desc { margin-top:8px; color:#bfeee7; line-height:1.6; }
+    .muted{color:var(--muted);font-size:14px}
+    footer{text-align:center;color:var(--muted);margin-top:24px}
+    .meta{display:flex;flex-direction:column;gap:8px}
+    .fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s ease-out,transform .6s ease-out;}
+    .fade-in.visible{opacity:1;transform:none}
+    .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
+    input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit; margin-top: 8px;}
+    .bt{position:fixed;right:18px;bottom:18px; z-index: 50; background:linear-gradient(90deg,var(--accent),var(--accent-2)); padding:12px;border-radius:999px;border:none;color:#012b26;cursor:pointer;box-shadow:0 8px 30px rgba(0,0,0,0.6); opacity: 0; transition: opacity 0.3s; }
+    .bt.visible { opacity: 1; }
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+      header { flex-direction: column; gap: 15px; position: static; }
+      h1 { font-size: 24px; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="tsparticles"></div>
+
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <!-- Logo removed per request -->
+        <div>
+          <div style="font-weight:700">Mohd Ayan</div>
+          <div class="muted" style="font-size:13px">B.Tech CSE • Data Science & ML Enthusiast</div>
+        </div>
+      </div>
+
+      <nav id="nav">
+        <a class="nav-link" href="#home" data-route="home">Home</a>
+        <a class="nav-link" href="#skills" data-route="skills">Skills</a>
+        <a class="nav-link" href="#education" data-route="education">Education</a>
+        <a class="nav-link" href="#projects" data-route="projects">Projects</a>
+        <a class="nav-link" href="#contact" data-route="contact">Contact</a>
+        <a class="btn" id="download" href="resume.pdf" download>Download PDF</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="page-section">
+        <div class="hero card fade-in">
+          <div>
+            <h1>Hi — I’m <span class="typing-text">Mohd Ayan — Data Science & AI Enthusiast</span></h1>
+            <div class="tagline">Turning data into actionable solutions</div>
+
+            <p class="about">
+              Motivated and detail-oriented B.Tech Computer Science student with strong technical,
+              analytical, and problem-solving skills. I build ML solutions and data-driven web apps
+              to solve practical problems. Currently focusing on model development, time-series analysis,
+              and full-stack ML app deployment.
+            </p>
+
+            <div style="margin-top:12px" class="skills">
+              <div class="chip">Python</div>
+              <div class="chip">Scikit-learn</div>
+              <div class="chip">Pandas</div>
+              <div class="chip">NumPy</div>
+              <div class="chip">Machine Learning</div>
+              <div class="chip">HTML/CSS/JS</div>
+            </div>
+
+            <div style="margin-top:14px;display:flex;gap:10px">
+              <a class="btn" href="#projects">View Projects</a>
+              <a class="nav-link" style="border: 1px solid var(--glass)" href="mailto:mohdayan8896@gmail.com">Email Me</a>
+            </div>
+          </div>
+
+          <aside style="display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center">
+            <div style="background:linear-gradient(180deg,#002b2b,#003a3f);padding:12px;border-radius:12px;width:100%;text-align:center">
+              <div style="font-size:12px;color:var(--muted)">Quick Stats</div>
+              <div style="font-weight:800;font-size:28px;margin-top:6px">2 Projects</div>
+              <div style="color:var(--muted);font-size:13px;margin-top:6px">Academic & Personal Work</div>
+            </div>
+
+            <div style="width:100%;background:var(--glass);padding:12px;border-radius:10px;text-align:center">
+              <div class="muted">Contact</div>
+              <div style="margin-top:8px;display:flex;flex-direction:column;gap:6px;align-items:center;justify-content:center">
+                <div class="muted">Email: <a href="mailto:mohdayan8896@gmail.com">mohdayan8896@gmail.com</a></div>
+                <div class="muted">Phone: +91 7355339397</div>
+                <div class="muted">LinkedIn: <a href="https://linkedin.com/in/mohd-ayan-39725b334" target="_blank">mohd-ayan-39725b334</a></div>
+                <div class="muted">GitHub: <a href="https://github.com/Ayan9397" target="_blank">Ayan9397</a></div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="card fade-in" style="margin-top:16px" id="about">
+          <strong>Career Objective</strong>
+          <p class="muted" style="margin-top:10px">
+            Motivated and detail-oriented Bachelor of Technology (CSE) student seeking a challenging role
+            in the IT industry to apply technical and analytical skills toward innovative projects and to
+            enhance practical knowledge and professional expertise.
+          </p>
+        </div>
+      </section>
+
+      <!-- rest of the sections unchanged -->
+      <section id="skills" class="page-section card fade-in">
+        <h2>My Core Skills</h2>
+        <div class="skills-grid">
+          <div>
+            <h3>Programming & Data</h3>
+            <ul>
+              <li>Programming Languages: C, C++, Python, Java</li>
+              <li>Data Science & ML: Scikit-learn, Pandas, NumPy, Matplotlib</li>
+              <li>Machine Learning concepts: Classification, Regression, Time-series</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Web & Tools</h3>
+            <ul>
+              <li>Web: HTML, CSS, JavaScript</li>
+              <li>Tools: Git, GitHub, Visual Studio Code</li>
+              <li>Frameworks: Django (for ML web apps)</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Soft Skills</h3>
+            <ul>
+              <li>Communication</li>
+              <li>Teamwork</li>
+              <li>Problem Solving</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="education" class="page-section card fade-in">
+        <h2>Education</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-title">B.Tech, Computer Science & Engineering</div>
+            <div class="timeline-subtitle">Bansal Institute of Engineering and Technology, Lucknow | 2022 – 2026</div>
+            <p class="timeline-desc">Specialization: Computer Science (ongoing)</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-title">Intermediate</div>
+            <div class="timeline-subtitle">O.N.G.C. Community School, Laharpur | 2022</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-title">High School</div>
+            <div class="timeline-subtitle">O.N.G.C. Community School, Laharpur | 2020</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="page-section card fade-in">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+          <div class="proj-card fade-in">
+            <div class="proj-title">Food Delivery Website</div>
+            <div class="skills" style="margin-top: 8px;">
+              <div class="chip">HTML</div>
+              <div class="chip">CSS</div>
+              <div class="chip">JavaScript</div>
+            </div>
+            <p class="proj-desc">
+              Developed a fully functional web application for browsing menus and placing orders.
+              Implemented responsive design for mobile compatibility and a clean user experience.
+            </p>
+          </div>
+
+          <div class="proj-card fade-in">
+            <div class="proj-title">Disease Prediction System</div>
+            <div class="skills" style="margin-top: 8px;">
+              <div class="chip">Django</div>
+              <div class="chip">Python</div>
+              <div class="chip">Scikit-learn</div>
+            </div>
+            <p class="proj-desc">
+              Built a full-stack ML web application using Django. Implemented a Random Forest Classifier
+              (Scikit-learn) to predict diseases from user-reported symptoms and provided an interactive UI.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="certs" class="page-section card fade-in">
+        <h2>Certifications & Achievements</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-title">GATE 2025 — Computer Science</div>
+            <div class="timeline-subtitle">Score: 468</div>
+            <p class="timeline-desc">Qualified GATE 2025 demonstrating strong fundamentals in computer science topics.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="page-section card fade-in">
+        <h2>Contact</h2>
+        <div class="contact-grid">
+          <div>
+            <p class="muted" style="margin-top:10px">For recruitment, collaborations, or project walkthroughs, feel free to reach out directly.</p>
+            <div style="margin-top:10px" class="meta">
+              <div class="muted">Email: <a href="mailto:mohdayan8896@gmail.com">mohdayan8896@gmail.com</a></div>
+              <div class="muted">Phone: +91 7355339397</div>
+              <div class="muted">LinkedIn: <a href="https://linkedin.com/in/mohd-ayan-39725b334" target="_blank">mohd-ayan-39725b334</a></div>
+              <div class="muted">GitHub: <a href="https://github.com/Ayan9397" target="_blank">Ayan9397</a></div>
+            </div>
+          </div>
+
+          <aside>
+            <strong>Message me</strong>
+            <form id="contactForm" style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+              <input type="text" id="name" placeholder="Your name" required />
+              <input type="email" id="email" placeholder="Your email" required />
+              <textarea id="message" rows="5" placeholder="Message"></textarea>
+              <button type="submit" class="btn">Send (opens email)</button>
+            </form>
+          </aside>
+        </div>
+      </section>
+
+      <footer class="muted">© Mohd Ayan — Built for recruiters and technical hiring managers.</footer>
+    </main>
+  </div>
+
+  <button class="bt" id="topBtn" title="Back to top">↑</button>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // tsParticles
+      tsParticles.load("tsparticles", {
+        particles: {
+          number: { value: 40, density: { enable: true, value_area: 800 } },
+          color: { value: "#00e6c3" },
+          shape: { type: "circle" },
+          opacity: { value: 0.3, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
+          size: { value: 2, random: true, anim: { enable: false } },
+          move: { enable: true, speed: 1, direction: "none", random: true, straight: false, out_mode: "out", bounce: false },
+        },
+        interactivity: { detect_on: "canvas", events: { onhover: { enable: false }, onclick: { enable: false } } },
+        retina_detect: true,
+      });
+
+      // Fade-in on scroll
+      const fadeElements = document.querySelectorAll('.fade-in');
+      const fadeInObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            fadeInObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      fadeElements.forEach(el => fadeInObserver.observe(el));
+
+      // Active nav link highlight
+      const sections = document.querySelectorAll('.page-section');
+      const navLinks = document.querySelectorAll('.nav-link');
+      const navObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href').substring(1) === entry.target.id) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }, { rootMargin: '-30% 0px -70% 0px', threshold: 0 });
+      sections.forEach(sec => navObserver.observe(sec));
+
+      // Contact form: opens email client with prefilled content
+      document.getElementById('contactForm').addEventListener('submit', e => {
+        e.preventDefault();
+        const n = document.getElementById('name').value.trim();
+        const em = document.getElementById('email').value.trim();
+        const msg = document.getElementById('message').value.trim();
+        const subject = encodeURIComponent('Contact from ' + n);
+        const body = encodeURIComponent(msg + "\n\nFrom: " + em);
+        const mailto = `mailto:mohdayan8896@gmail.com?subject=${subject}&body=${body}`;
+        window.location.href = mailto;
+      });
+
+      // Back to Top button
+      const topBtn = document.getElementById('topBtn');
+      topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            topBtn.classList.add('visible');
+        } else {
+            topBtn.classList.remove('visible');
+        }
+      });
+
+      // Smooth anchor scrolling for nav links
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', e=>{
+          e.preventDefault();
+          const target = document.querySelector(a.getAttribute('href'));
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
